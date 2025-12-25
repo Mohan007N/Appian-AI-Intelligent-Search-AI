@@ -1,0 +1,578 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <i class="fas fa-brain"></i>
+                <span>IntelliSearch<span class="logo-ai">AI</span></span>
+            </div>
+            <button class="sidebar-toggle">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+        </div>
+        
+        <div class="user-profile">
+            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="User" id="userAvatar">
+            <div class="user-info">
+                <h4 id="userName">Loading...</h4>
+                <p id="userRole">User</p>
+            </div>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="#search" class="nav-item active">
+                <i class="fas fa-search"></i>
+                <span>AI Search</span>
+            </a>
+            <a href="#analytics" class="nav-item">
+                <i class="fas fa-chart-bar"></i>
+                <span>Analytics</span>
+            </a>
+            <a href="#documents" class="nav-item">
+                <i class="fas fa-folder"></i>
+                <span>Documents</span>
+                <span class="badge">24</span>
+            </a>
+            <a href="#teams" class="nav-item">
+                <i class="fas fa-users"></i>
+                <span>Teams</span>
+            </a>
+            <a href="#integrations" class="nav-item">
+                <i class="fas fa-plug"></i>
+                <span>Integrations</span>
+            </a>
+            <a href="#settings" class="nav-item">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <div class="storage-info">
+                <div class="storage-header">
+                    <span>Storage</span>
+                    <span>65%</span>
+                </div>
+                <div class="storage-bar">
+                    <div class="storage-progress" style="width: 65%"></div>
+                </div>
+            </div>
+            <button class="btn-logout" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </button>
+        </div>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <div class="search-container">
+                <i class="fas fa-search"></i>
+                <input type="text" id="globalSearch" placeholder="Search across all documents, policies, and cases...">
+                <div class="search-options">
+                    <select id="searchFilter">
+                        <option value="all">All Sources</option>
+                        <option value="policies">Policies</option>
+                        <option value="procedures">Procedures</option>
+                        <option value="guidelines">Guidelines</option>
+                    </select>
+                    <button class="btn-search" id="searchBtn">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="top-bar-actions">
+                <button class="btn-icon" id="notificationsBtn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                <button class="btn-icon" id="helpBtn">
+                    <i class="fas fa-question-circle"></i>
+                </button>
+                <div class="user-dropdown">
+                    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="User">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Dashboard Content -->
+        <div class="dashboard-content">
+            <!-- Quick Stats -->
+            <div class="quick-stats">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: #e3f2fd;">
+                        <i class="fas fa-search" style="color: #1976d2;"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="dailySearches">1,245</h3>
+                        <p>Daily Searches</p>
+                    </div>
+                    <span class="stat-change positive">+12%</span>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: #f3e5f5;">
+                        <i class="fas fa-clock" style="color: #7b1fa2;"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="avgResponse">0.42s</h3>
+                        <p>Avg Response Time</p>
+                    </div>
+                    <span class="stat-change positive">-8%</span>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: #e8f5e9;">
+                        <i class="fas fa-check-circle" style="color: #388e3c;"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="resolvedCases">89</h3>
+                        <p>Resolved Cases</p>
+                    </div>
+                    <span class="stat-change positive">+23%</span>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: #fff3e0;">
+                        <i class="fas fa-hourglass-half" style="color: #f57c00;"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="timeSaved">156.7</h3>
+                        <p>Hours Saved</p>
+                    </div>
+                    <span class="stat-change positive">+18%</span>
+                </div>
+            </div>
+            
+            <!-- Main Content Area -->
+            <div class="content-grid">
+                <!-- AI Search Interface -->
+                <div class="content-card full-width">
+                    <div class="card-header">
+                        <h2>Intelligent Knowledge Retrieval</h2>
+                        <p>Ask questions in natural language or search for specific policies</p>
+                    </div>
+                    <div class="ai-search-interface">
+                        <div class="search-input-wrapper">
+                            <div class="search-input">
+                                <i class="fas fa-search"></i>
+                                <input type="text" id="aiSearchInput" placeholder="Example: What's the refund policy for premium customers?">
+                                <div class="search-actions">
+                                    <button class="btn-microphone" id="voiceSearchBtn">
+                                        <i class="fas fa-microphone"></i>
+                                    </button>
+                                    <button class="btn-search-main" id="aiSearchBtn">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="search-suggestions">
+                                <span>Try:</span>
+                                <button class="suggestion">compliance requirements Q4 2024</button>
+                                <button class="suggestion">escalation procedures for VIP customers</button>
+                                <button class="suggestion">data privacy policy updates</button>
+                            </div>
+                        </div>
+                        
+                        <div class="search-results" id="searchResults">
+                            <!-- Results will be populated here -->
+                            <div class="empty-state">
+                                <i class="fas fa-search"></i>
+                                <h3>Enter a search query to begin</h3>
+                                <p>Ask questions about policies, procedures, or compliance requirements</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Analytics & Recent Activity -->
+                <div class="content-card">
+                    <div class="card-header">
+                        <h2>Performance Analytics</h2>
+                        <div class="card-actions">
+                            <select>
+                                <option>Last 7 days</option>
+                                <option>Last 30 days</option>
+                                <option>Last quarter</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <div class="card-header">
+                        <h2>Recent Activity</h2>
+                        <a href="#view-all" class="view-all">View All</a>
+                    </div>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p>You searched for <strong>"refund policy exceptions"</strong></p>
+                                <span class="activity-time">10 minutes ago</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-file-download"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p>Downloaded <strong>"Compliance Guidelines Q4"</strong></p>
+                                <span class="activity-time">2 hours ago</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-share-alt"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p>Shared <strong>"Security Protocols"</strong> with team</p>
+                                <span class="activity-time">Yesterday</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-bookmark"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p>Bookmarked <strong>"Customer Escalation Flow"</strong></p>
+                                <span class="activity-time">2 days ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Document Quick Access -->
+            <div class="content-card full-width">
+                <div class="card-header">
+                    <h2>Recently Accessed Documents</h2>
+                    <button class="btn btn-outline" id="uploadBtn">
+                        <i class="fas fa-upload"></i> Upload Document
+                    </button>
+                </div>
+                <div class="documents-grid" id="documentsList">
+                    <!-- Documents will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Notifications Panel -->
+    <div class="notifications-panel" id="notificationsPanel">
+        <div class="panel-header">
+            <h3>Notifications</h3>
+            <button class="btn-icon" id="closeNotifications">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="notifications-list">
+            <!-- Notifications will be populated here -->
+        </div>
+    </div>
+</div>
+
+<!-- Upload Modal -->
+<div class="modal" id="uploadModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Upload Document</h3>
+            <button class="btn-icon" id="closeModal">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="upload-area" id="uploadArea">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <h4>Drag & drop files here</h4>
+                <p>or click to browse</p>
+                <input type="file" id="fileInput" multiple accept=".pdf,.doc,.docx,.txt">
+            </div>
+            <div class="upload-progress" id="uploadProgress">
+                <!-- Progress will be shown here -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+<script>
+    // Check authentication
+    const token = localStorage.getItem('token');
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    
+    if (!token || !user.id) {
+        window.location.href = '/login';
+    } else {
+        document.getElementById('userName').textContent = user.full_name || user.username;
+        document.getElementById('userRole').textContent = user.role === 'admin' ? 'Administrator' : 'User';
+    }
+    
+    // Logout handler
+    document.getElementById('logoutBtn').addEventListener('click', async function() {
+        try {
+            await fetch('/api/logout', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.href = '/login';
+        } catch (error) {
+            console.error('Logout error:', error);
+        }
+    });
+    
+    // Load analytics data
+    async function loadAnalytics() {
+        try {
+            const response = await fetch('/api/analytics', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            
+            if (response.ok) {
+                const data = await response.json();
+                
+                // Update stats
+                document.getElementById('dailySearches').textContent = data.daily_searches.toLocaleString();
+                document.getElementById('avgResponse').textContent = data.avg_response_time + 's';
+                document.getElementById('resolvedCases').textContent = data.resolved_cases;
+                document.getElementById('timeSaved').textContent = data.time_saved.toFixed(1);
+                
+                // Update chart
+                updateChart(data);
+            }
+        } catch (error) {
+            console.error('Error loading analytics:', error);
+        }
+    }
+    
+    // Load documents
+    async function loadDocuments() {
+        try {
+            const response = await fetch('/api/documents', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            
+            if (response.ok) {
+                const documents = await response.json();
+                const container = document.getElementById('documentsList');
+                
+                if (documents.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-documents">
+                            <i class="fas fa-folder-open"></i>
+                            <h4>No documents uploaded yet</h4>
+                            <p>Upload your first policy document to get started</p>
+                        </div>
+                    `;
+                } else {
+                    container.innerHTML = documents.map(doc => `
+                        <div class="document-card">
+                            <div class="document-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="document-info">
+                                <h4>${doc.title}</h4>
+                                <p>${doc.department} • ${doc.doc_type}</p>
+                                <div class="document-meta">
+                                    <span><i class="fas fa-calendar"></i> ${doc.upload_date}</span>
+                                    <span><i class="fas fa-eye"></i> ${doc.access_count} views</span>
+                                </div>
+                            </div>
+                            <div class="document-actions">
+                                <button class="btn-icon" title="View">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-icon" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            }
+        } catch (error) {
+            console.error('Error loading documents:', error);
+        }
+    }
+    
+    // Initialize dashboard
+    document.addEventListener('DOMContentLoaded', function() {
+        loadAnalytics();
+        loadDocuments();
+        
+        // AI Search functionality
+        document.getElementById('aiSearchBtn').addEventListener('click', performSearch);
+        document.getElementById('aiSearchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') performSearch();
+        });
+        
+        // Load user data
+        fetch('/api/user', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            localStorage.setItem('user', JSON.stringify(data));
+        });
+    });
+    
+    async function performSearch() {
+        const query = document.getElementById('aiSearchInput').value;
+        if (!query.trim()) return;
+        
+        const resultsContainer = document.getElementById('searchResults');
+        resultsContainer.innerHTML = `
+            <div class="loading-state">
+                <div class="spinner"></div>
+                <p>Searching through documents...</p>
+            </div>
+        `;
+        
+        try {
+            const response = await fetch('/api/search', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ query })
+            });
+            
+            const data = await response.json();
+            
+            if (response.ok) {
+                displaySearchResults(data.results, data.query_time);
+            }
+        } catch (error) {
+            resultsContainer.innerHTML = `
+                <div class="error-state">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <h3>Search failed</h3>
+                    <p>Please try again later</p>
+                </div>
+            `;
+        }
+    }
+    
+    function displaySearchResults(results, queryTime) {
+        const container = document.getElementById('searchResults');
+        
+        if (results.length === 0) {
+            container.innerHTML = `
+                <div class="empty-results">
+                    <i class="fas fa-search"></i>
+                    <h3>No results found</h3>
+                    <p>Try different keywords or check your spelling</p>
+                </div>
+            `;
+            return;
+        }
+        
+        container.innerHTML = `
+            <div class="results-header">
+                <span>Found ${results.length} results in ${queryTime}</span>
+                <div class="results-filter">
+                    <span>Sort by:</span>
+                    <select>
+                        <option>Relevance</option>
+                        <option>Date</option>
+                        <option>Department</option>
+                    </select>
+                </div>
+            </div>
+            <div class="results-list">
+                ${results.map(result => `
+                    <div class="result-card">
+                        <div class="result-header">
+                            <div class="result-title">
+                                <i class="fas fa-file-alt"></i>
+                                <h4>${result.title}</h4>
+                                <span class="relevance-badge">${result.relevance}% match</span>
+                            </div>
+                            <div class="result-actions">
+                                <button class="btn-icon" title="View">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-icon" title="Bookmark">
+                                    <i class="far fa-bookmark"></i>
+                                </button>
+                                <button class="btn-icon" title="Share">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="result-content">
+                            <p>${result.content}</p>
+                        </div>
+                        <div class="result-footer">
+                            <span class="tag"><i class="fas fa-tag"></i> ${result.doc_type}</span>
+                            <span class="tag"><i class="fas fa-building"></i> ${result.department}</span>
+                            <span class="tag"><i class="fas fa-calendar"></i> Updated ${result.last_updated}</span>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+    
+    function updateChart(data) {
+        const ctx = document.getElementById('performanceChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Searches',
+                    data: [856, 1023, 1245, 987, 1321, 845, 923],
+                    borderColor: '#1976d2',
+                    backgroundColor: 'rgba(25, 118, 210, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }, {
+                    label: 'Resolved Cases',
+                    data: [45, 67, 89, 76, 92, 54, 71],
+                    borderColor: '#388e3c',
+                    backgroundColor: 'rgba(56, 142, 60, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+</script>
+{% endblock %}

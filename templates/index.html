@@ -1,0 +1,288 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Navigation -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-logo">
+            <i class="fas fa-brain"></i>
+            <span>IntelliSearch<span class="logo-ai">AI</span></span>
+        </div>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#solutions">Solutions</a>
+            <a href="#benefits">Benefits</a>
+            <a href="#contact">Contact</a>
+            <a href="{{ url_for('login_page') }}" class="nav-btn">Login</a>
+            <a href="{{ url_for('register_page') }}" class="nav-btn primary">Get Started</a>
+        </div>
+        <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-container">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-bolt"></i>
+                <span>Enterprise AI Solution</span>
+            </div>
+            <h1 class="hero-title">Intelligent Knowledge Retrieval for <span class="highlight">Appian</span> Case Management</h1>
+            <p class="hero-subtitle">Transform how support agents handle complex cases with AI-powered instant access to policy documents, reducing handling time by 65% and improving compliance accuracy.</p>
+            <div class="hero-cta">
+                <a href="{{ url_for('register_page') }}" class="btn btn-primary btn-large">
+                    <i class="fas fa-rocket"></i> Start Free Trial
+                </a>
+                <a href="#demo" class="btn btn-outline btn-large">
+                    <i class="fas fa-play-circle"></i> Watch Demo
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <h3>65%</h3>
+                    <p>Faster Resolution</p>
+                </div>
+                <div class="stat">
+                    <h3>94%</h3>
+                    <p>Accuracy Rate</p>
+                </div>
+                <div class="stat">
+                    <h3>40%</h3>
+                    <p>Cost Reduction</p>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="dashboard-preview">
+                <div class="dashboard-header">
+                    <div class="dashboard-search">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search policies, procedures, guidelines..." readonly>
+                        <button class="search-btn"><i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+                <div class="dashboard-results">
+                    <div class="result-item">
+                        <div class="result-icon"><i class="fas fa-file-alt"></i></div>
+                        <div class="result-content">
+                            <h4>Customer Refund Policy v2.1</h4>
+                            <p>Refunds must be processed within 5-7 business days following approval...</p>
+                            <span class="result-tag">Policy • Customer Service • 95% match</span>
+                        </div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-icon"><i class="fas fa-shield-alt"></i></div>
+                        <div class="result-content">
+                            <h4>Compliance Guidelines Q4 2024</h4>
+                            <p>All financial transactions must comply with SEC regulations section 4B...</p>
+                            <span class="result-tag">Guideline • Compliance • 87% match</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Problem Statement -->
+<section class="problem-section" id="problem">
+    <div class="section-container">
+        <div class="section-header">
+            <h2 class="section-title">The Challenge: Manual Search in High-Stakes Environments</h2>
+            <p class="section-subtitle">Support agents face significant challenges when handling complex cases</p>
+        </div>
+        <div class="problem-cards">
+            <div class="problem-card">
+                <div class="problem-icon problem">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3>High Handling Time</h3>
+                <p>Average 15-20 minutes spent searching across 8+ document repositories for each complex case</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon problem">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <h3>Compliance Risks</h3>
+                <p>42% of compliance issues stem from agents using outdated or incorrect policy versions</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon problem">
+                    <i class="fas fa-random"></i>
+                </div>
+                <h3>Workflow Disruption</h3>
+                <p>Constant context switching between Appian and external document systems reduces productivity</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon problem">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <h3>Agent Burnout</h3>
+                <p>Frustration from manual searches leads to 25% higher attrition rates among experienced agents</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Solution Features -->
+<section class="features-section" id="features">
+    <div class="section-container">
+        <div class="section-header">
+            <h2 class="section-title">AI-Powered Intelligent Retrieval</h2>
+            <p class="section-subtitle">Seamlessly integrated with Appian Case Management</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+                <h3>Semantic Search</h3>
+                <p>Understands context and intent, not just keywords. Finds relevant policies even with vague queries.</p>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check"></i> Natural language processing</li>
+                    <li><i class="fas fa-check"></i> Context-aware results</li>
+                    <li><i class="fas fa-check"></i> Synonym recognition</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>Smart Summarization</h3>
+                <p>AI extracts and presents only the relevant sections, saving reading time by up to 80%.</p>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check"></i> Key point extraction</li>
+                    <li><i class="fas fa-check"></i> Actionable insights</li>
+                    <li><i class="fas fa-check"></i> Compliance highlights</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Real-Time Integration</h3>
+                <p>Embedded directly within Appian interfaces. No switching between applications required.</p>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check"></i> Single sign-on</li>
+                    <li><i class="fas fa-check"></i> Context preservation</li>
+                    <li><i class="fas fa-check"></i> Instant deployment</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Analytics Dashboard</h3>
+                <p>Track search patterns, identify knowledge gaps, and measure ROI with detailed analytics.</p>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check"></i> Usage metrics</li>
+                    <li><i class="fas fa-check"></i> Gap analysis</li>
+                    <li><i class="fas fa-check"></i> ROI calculator</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="section-container">
+        <div class="cta-content">
+            <h2>Ready to Transform Your Case Management?</h2>
+            <p>Join Fortune 500 companies already using IntelliSearch AI to revolutionize their Appian workflows.</p>
+            <div class="cta-buttons">
+                <a href="{{ url_for('register_page') }}" class="btn btn-primary btn-large">
+                    <i class="fas fa-calendar-check"></i> Schedule Demo
+                </a>
+                <a href="{{ url_for('login_page') }}" class="btn btn-outline btn-large">
+                    <i class="fas fa-user-check"></i> Existing User Login
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <div class="footer-logo">
+                <i class="fas fa-brain"></i>
+                <span>IntelliSearch<span class="logo-ai">AI</span></span>
+            </div>
+            <p>Enterprise AI solutions for intelligent case management and knowledge retrieval.</p>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>Product</h4>
+            <a href="#features">Features</a>
+            <a href="#solutions">Solutions</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#api">API</a>
+        </div>
+        <div class="footer-section">
+            <h4>Company</h4>
+            <a href="#about">About</a>
+            <a href="#careers">Careers</a>
+            <a href="#contact">Contact</a>
+            <a href="#blog">Blog</a>
+        </div>
+        <div class="footer-section">
+            <h4>Legal</h4>
+            <a href="#privacy">Privacy Policy</a>
+            <a href="#terms">Terms of Service</a>
+            <a href="#security">Security</a>
+            <a href="#compliance">Compliance</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 IntelliSearch AI. All rights reserved. Enterprise AI Solution for Appian Case Management.</p>
+    </div>
+</footer>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Mobile menu toggle
+    document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+        document.querySelector('.nav-links').classList.toggle('active');
+    });
+    
+    // Animate stats counter
+    function animateCounter(element, target, duration) {
+        let start = 0;
+        const increment = target / (duration / 16);
+        const timer = setInterval(() => {
+            start += increment;
+            if (start >= target) {
+                element.textContent = target + '%';
+                clearInterval(timer);
+            } else {
+                element.textContent = Math.floor(start) + '%';
+            }
+        }, 16);
+    }
+    
+    // Animate on scroll
+    window.addEventListener('scroll', function() {
+        const stats = document.querySelectorAll('.stat h3');
+        stats.forEach(stat => {
+            const rect = stat.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom >= 0) {
+                const target = parseInt(stat.textContent);
+                if (!stat.classList.contains('animated')) {
+                    stat.classList.add('animated');
+                    animateCounter(stat, target, 2000);
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}

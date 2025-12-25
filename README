@@ -1,0 +1,37 @@
+# IntelliSearch AI - Appian Knowledge Retrieval System
+
+A professional, enterprise-grade AI solution for intelligent knowledge retrieval in Appian Case Management systems.
+
+## Features
+
+- **AI-Powered Semantic Search**: Natural language understanding for policy documents
+- **Real-time Integration**: Seamless integration with Appian Case Management
+- **Smart Document Processing**: Automatic classification and tagging
+- **Advanced Analytics**: Real-time insights and performance metrics
+- **Secure Authentication**: JWT-based authentication with role-based access
+- **Responsive Design**: Modern, professional UI across all devices
+
+## Technology Stack
+
+### Frontend
+- HTML5, CSS3, JavaScript (ES6+)
+- Chart.js for data visualization
+- Responsive design with CSS Grid/Flexbox
+- Font Awesome icons
+
+### Backend
+- Python Flask
+- SQLAlchemy ORM
+- JWT Authentication
+- RESTful API architecture
+
+### Database
+- SQLite (development)
+- PostgreSQL ready (production)
+
+## Installation
+
+1. **Clone the repository**
+```bash
+git clone https://github.com/yourusername/intellisearch-ai.git
+cd intellisearch-ai

@@ -1,0 +1,196 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-left">
+        <div class="auth-header">
+            <a href="{{ url_for('index') }}" class="auth-logo">
+                <i class="fas fa-brain"></i>
+                <span>IntelliSearch<span class="logo-ai">AI</span></span>
+            </a>
+            <h1>Create your account</h1>
+            <p>Sign up to access IntelliSearch AI</p>
+        </div>
+        
+        <form id="registerForm" class="auth-form">
+            <div class="form-group">
+                <label for="full_name">Full Name</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="full_name" name="full_name" placeholder="Your full name" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="company">Company</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-building"></i>
+                    <input type="text" id="company" name="company" placeholder="Company (optional)">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-user-circle"></i>
+                    <input type="text" id="username" name="username" placeholder="Choose a username" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" name="password" placeholder="Create a password" required>
+                    <button type="button" class="password-toggle">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Repeat your password" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">
+                <i class="fas fa-user-plus"></i> Create Account
+            </button>
+
+            <div class="auth-divider">
+                <span>or continue with</span>
+            </div>
+
+            <div class="social-auth">
+                <button type="button" class="social-btn google">
+                    <i class="fab fa-google"></i> Google
+                </button>
+                <button type="button" class="social-btn microsoft">
+                    <i class="fab fa-microsoft"></i> Microsoft
+                </button>
+            </div>
+
+            <div class="auth-footer">
+                <p>Already have an account? <a href="{{ url_for('login_page') }}">Sign in</a></p>
+            </div>
+        </form>
+    </div>
+    
+    <div class="auth-right">
+        <div class="auth-right-content">
+            <div class="testimonial">
+                <div class="testimonial-content">
+                    <i class="fas fa-quote-left"></i>
+                    <p>"IntelliSearch AI helped our team find policies faster and avoid costly compliance mistakes."</p>
+                </div>
+                <div class="testimonial-author">
+                    <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="User">
+                    <div>
+                        <h4>Sophia Martinez</h4>
+                        <p>Head of Compliance, Healthcare</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="features-list">
+                <h3>Why join IntelliSearch AI?</h3>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Personalized search results</li>
+                    <li><i class="fas fa-check-circle"></i> Secure company-wide knowledge base</li>
+                    <li><i class="fas fa-check-circle"></i> Fast analytics and reporting</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.getElementById('registerForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const password = document.getElementById('password').value;
+        const confirm = document.getElementById('confirm_password').value;
+        if (password !== confirm) {
+            showNotification('Passwords do not match', 'error');
+            return;
+        }
+
+        const payload = {
+            full_name: document.getElementById('full_name').value,
+            company: document.getElementById('company').value,
+            username: document.getElementById('username').value,
+            email: document.getElementById('email').value,
+            password: password
+        };
+
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating...';
+        submitBtn.disabled = true;
+
+        try {
+            const res = await fetch('/api/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await res.json();
+            if (res.ok) {
+                showNotification('Registration successful! Redirecting to login...', 'success');
+                setTimeout(() => window.location.href = '/login', 1400);
+            } else {
+                showNotification(data.error || 'Registration failed', 'error');
+            }
+        } catch (err) {
+            showNotification('Network error. Please try again.', 'error');
+        } finally {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        }
+    });
+
+    // Password toggle (reuse styling from login)
+    const toggleBtn = document.querySelector('.password-toggle');
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const icon = this.querySelector('i');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+    }
+
+    function showNotification(message, type) {
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.innerHTML = `
+            <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+            <span>${message}</span>
+        `;
+        document.body.appendChild(notification);
+        setTimeout(() => notification.classList.add('show'), 10);
+        setTimeout(() => { notification.classList.remove('show'); setTimeout(() => document.body.removeChild(notification), 300); }, 3000);
+    }
+</script>
+{% endblock %}
